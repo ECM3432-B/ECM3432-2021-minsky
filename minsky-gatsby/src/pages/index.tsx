@@ -5,6 +5,8 @@ import Composite from "../components/composite"
 import TemperaturePlot from "../components/temperatureplot"
 import { useState } from "react"
 
+// import "./styling.css"
+
 const IndexPage = () => {
   let lineData: number[], rawData: number[]
   const buffer_size = 20
@@ -34,13 +36,28 @@ const IndexPage = () => {
   return (
 
     <Layout>
-
-      <div className="row" style={{ visibility: "hidden", height: "0px" }} >
+      <div>
+      {
+        // A desktop
+        screen.width > 992 ? (
+          <><div className="row" style={{ visibility: "hidden", height: "0px" }}>
+            </div>
+            <div className="row"> 
+              <Composite id="comp" width={480} height={640} callback={fn} controls="off" />
+              <TemperaturePlot id="plot" width={300} height={400} pal={200} latest={plotData} min={plotMin} max={plotMax} />
+            </div></>
+        ): (
+        // A mobile
+          <><div className="row" style={{ visibility: "hidden", height: "0px" }}>
+            </div>
+            <div className="row"> 
+              <Composite id="comp" width={240} height={320} callback={fn} controls="off" />
+              <TemperaturePlot id="plot" width={150} height={200} pal={100} latest={plotData} min={plotMin} max={plotMax} />
+            </div></>
+        )
+      }
       </div>
-      <div className="row">
-        <Composite id="comp"  width={480} height={640} callback={fn} controls="off" />
-        <TemperaturePlot id="plot" width={300} height={400} pal={200} latest={plotData} min={plotMin} max={plotMax} />
-      </div>
+      
     </Layout>
   )
 }
