@@ -1,0 +1,6 @@
+.composite-size {
+    width: 480px;
+    height: 640px;
+}
+
+@import '../dist/vendor/bootstrap/css/bootstrap.min.css'
